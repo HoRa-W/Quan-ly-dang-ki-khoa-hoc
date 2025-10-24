@@ -35,3 +35,8 @@ def Select(text1):
            f"WHERE {find_in4} = {Data_Find}"
     
     return out1
+
+def Select_All(text1):
+    
+    out1 = f"SELECT * FROM {text1}"
+    return out1
