@@ -1,11 +1,20 @@
 import mysql.connector
 from mysql.connector import errorcode
-
 class Database:
-    
+
     def __init__(self, user, password):
-        self.__user = user
-        self.__password = password
+        self.user = user
+        self.password = password
+
+    def Secure(self):
+        if (self.user == "root" and self.password == "123456789"): pass
+        else:
+            return "Sai user hoac password"
+    
+    try:
+        Secure()
+    except:
+        pass
 
     #Tai day xay dung nhu la 1 database
     config = {
@@ -46,10 +55,10 @@ class Database:
 
 
     #Tạo một database và kiểm tra đã tồn tại hay chưa
-    def dataBase_conn(input):
+    def dataBase_conn(self, input):
 
         try:
-            cursor.execute(f"CREATE DATABASE {input}")
+            self.cursor.execute(f"CREATE DATABASE {input}")
 
         except mysql.connector.Error as err:
             if (err.errno == errorcode.ER_DB_CREATE_EXISTS) :
@@ -57,14 +66,15 @@ class Database:
             else:
                 print(err)
 
-
-    dataBase_conn("Course_Registration")
-
+    try:
+        dataBase_conn("Course_Registration")
+    except:
+        pass
     #Ket noi su dung database Course_Registration
-    def checkConn():
+    def checkConn(self):
 
         try:
-            conn.database = config['database']
+            self.conn.database = self.config['database']
             print("Connect DB successfully")
 
         except mysql.connector.Error as err:
@@ -72,10 +82,10 @@ class Database:
             print(err)
 
 
-    def checkTable(input):
+    def checkTable(self, input):
 
         try:
-            cursor.execute(input)
+            self.cursor.execute(input)
             print(f"Create table successfully")
 
         except mysql.connector.Error as err:
@@ -85,7 +95,7 @@ class Database:
                 print(err)
 
 
-    def InsertData(input):
+    def InsertData(self, input):
 
         # In this input will be InsertBook1 ()
         """
@@ -96,16 +106,16 @@ class Database:
         """
 
         try:
-            cursor.execute(input)
-            conn.commit()
+            self.cursor.execute(input)
+            self.conn.commit()
             print("Insert data successfully")
 
         except mysql.connector.Error as err:
             print(f"Error: {err}")
-            conn.rollback() #Đưa database về lại trạng thái trước khi thực thi lệnh
+            self.conn.rollback() #Đưa database về lại trạng thái trước khi thực thi lệnh
 
 
-    def InsertDatas(input1, input2):
+    def InsertDatas(self, input1, input2):
 
         #Obligated that input1 must be an string, input2 is list
         #In this input1 is sql_add_book () and input2 is book_data [()]
@@ -126,26 +136,26 @@ class Database:
             return f"{input2} Khong phai la list"
         else:
             try:
-                cursor.executemany(input1, input2)
-                conn.commit()
+                self.cursor.executemany(input1, input2)
+                self.conn.commit()
                 print("Insert records successfully")
             except mysql.connector.Error as err:
                 print(f"Error: {err}")
-                conn.rollback #Đưa database về lại trạng thái trước khi thực thi lệnh
+                self.conn.rollback #Đưa database về lại trạng thái trước khi thực thi lệnh
 
 
-    def checkUpdate(input1, input2):
+    def checkUpdate(self, input1, input2):
 
         try:
-            cursor.execute(input1, input2)
-            conn.commit()
+            self.cursor.execute(input1, input2)
+            self.conn.commit()
             print("Update data successfully")
         except mysql.connector.Error as err:
             print(f"Error: {err}")
-            conn.rollback() #Đưa database về lại trạng thái trước khi thực thi lệnh
+            self.conn.rollback() #Đưa database về lại trạng thái trước khi thực thi lệnh
 
 
-    def Query(input):
+    def Query(self, input):
 
         #In here input will be select_query
         """
@@ -164,15 +174,15 @@ class Database:
         """
 
         #Tại đây là phân lọc ra những trường hợp 
-        if "Students" in input: test = attribute_Students
-        if "Courses" in input: test = attribute_Courses
-        if "Enroll" in input: test = attribute_Enroll
+        if "Students" in input: test = self.attribute_Students
+        if "Courses" in input: test = self.attribute_Courses
+        if "Enroll" in input: test = self.attribute_Enroll
 
         #Bắt đầu chạy code query kiểm và xuất ra
         try:
-            cursor.execute(input)
-            results = cursor.fetchall()
-            if (test == attribute_Students):
+            self.cursor.execute(input)
+            results = self.cursor.fetchall()
+            if (test == self.attribute_Students):
                 for row in results:
                     #Test: Duyet theo thuoc tinh
                     #row: Du lieu duoc duyet ra
@@ -187,19 +197,36 @@ class Database:
             print(f"Error: {err}")
 
 
-    def Delete_Data():
+    def Delete_Data(self, input1):
 
-        pass
+        try:
+            self.cursor.execute(input1)
+            self.conn.commit()
+            print("Delete data successfully")
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            self.conn.rollback() #Đưa database về lại trạng thái trước khi thực thi lệnh
 
 
-    def Turnoff():
-        cursor.close()
-        conn.close()
+    def Update_Data(self, input1):
 
-    def Data_Important():
+        try:
+            self.cursor.execute(input1)
+            self.conn.commit()
+            print("Update data successfully")
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            self.conn.rollback() #Đưa database về lại trạng thái trước khi thực thi lệnh
+
+
+    def Turnoff(self):
+        self.cursor.close()
+        self.conn.close()
+
+    def Data_Important(self):
         #------------------------Information--------------------------
-        config['database'] = 'Course_Registration'
-        checkConn()
+        self.config['database'] = 'Course_Registration'
+        self.checkConn()
 
         sql_Students = (
             "CREATE TABLE Students ("
@@ -211,12 +238,12 @@ class Database:
             ");"
         )
 
-        checkTable(sql_Students)
+        self.checkTable(sql_Students)
 
         #-----------------------------------------------------------------
 
-        config['database'] = 'Course_Registration'
-        checkConn()
+        self.config['database'] = 'Course_Registration'
+        self.checkConn()
 
         sql_Courses = (
             "CREATE TABLE Courses ("
@@ -227,12 +254,12 @@ class Database:
             ");"
         )
 
-        checkTable(sql_Courses)
+        self.checkTable(sql_Courses)
 
         #-----------------------------------------------------------------
 
-        config['database'] = 'Course_Registration'
-        checkConn()
+        self.config['database'] = 'Course_Registration'
+        self.checkConn()
 
         sql_Enroll = (
             "CREATE TABLE Enroll(" 
@@ -240,9 +267,12 @@ class Database:
             " MSSV VARCHAR(255)," 
             " Course_Name VARCHAR(255)," 
             " Regis_date DATE" 
-            ")"
+            ");"
         )
-        checkTable(sql_Enroll)
+        self.checkTable(sql_Enroll)
 
-    if __name__ == "__main__":
-        Turnoff()
+
+if __name__ == "__main__":
+    db = Database('root', '123456789')
+    db.Data_Important()
+    db.Turnoff()
