@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import errorcode
 
+#Tai day xay dung nhu la 1 database
 config = {
     'user' : 'root',
     'password': '123456789',
