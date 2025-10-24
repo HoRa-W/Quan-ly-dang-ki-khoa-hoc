@@ -1,5 +1,3 @@
-import DBLab21
-
 attribute_Students = ["MSSV", "Hovaten", "Email", "Phone_no", "Address"]
 attribute_Courses = ["Course_ID", "Course_Name", "Description", "Credit"]
 attribute_Enroll = ["Regis_ID", "MSSV", "Course_Name", "Regis_date"]
@@ -32,11 +30,11 @@ def Select(text1):
     Data_Find = input(f"Tim kiem thong tin gi cua {find_in4}: ")
 
     out1 = f"SELECT * FROM {text1}"\
-           f"WHERE {find_in4} = {Data_Find}"
+           f"WHERE {find_in4} = {Data_Find};"
     
     return out1
 
 def Select_All(text1):
-    
-    out1 = f"SELECT * FROM {text1}"
+
+    out1 = f"SELECT * FROM {text1};"
     return out1

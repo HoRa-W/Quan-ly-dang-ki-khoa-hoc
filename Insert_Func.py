@@ -2,10 +2,6 @@ attribute_Students = ["MSSV", "Hovaten", "Email", "Phone_no", "Address"]
 attribute_Courses = ["Course_ID", "Course_Name", "Description", "Credit"]
 attribute_Enroll = ["Regis_ID", "MSSV", "Course_Name", "Regis_date"]
 
-import DBLab21
-
-DBLab21.InsertData()
-
 """
 InsertBook1 = ("INSERT INTO Books"
              "(title, author, published_date) "
@@ -13,7 +9,7 @@ InsertBook1 = ("INSERT INTO Books"
              )
 """
 def Insert_Temple4(text1):
-    
+
     if "Courses" in text1: test = attribute_Courses
     if "Enroll" in text1: test = attribute_Enroll
 
