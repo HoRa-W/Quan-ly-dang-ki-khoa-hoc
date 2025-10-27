@@ -15,7 +15,8 @@ class Database:
     config = {
         'user' : 'root',
         'password': 'SigtupThisAcc123',
-        'host': 'localhost'
+        'host': 'localhost',
+        'database': 'Course_Registration'
     }
 
     #Ý tưởng tại đây chính là sử dụng với 1 Query nhưng có thể truy xuất ra 
@@ -121,18 +122,13 @@ class Database:
             ('The C++ Programming Language', 'Bjarne Strourstrup', '2016-05-20')
         ]
         """
-        if (isinstance(input1, str)):
-            return f"{input1} Khong phai la string"
-        elif (isinstance(input2, list)):
-            return f"{input2} Khong phai la list"
-        else:
-            try:
-                self.cursor.executemany(input1, input2)
-                self.conn.commit()
-                print("Insert records successfully")
-            except mysql.connector.Error as err:
-                print(f"Error: {err}")
-                self.conn.rollback #Đưa database về lại trạng thái trước khi thực thi lệnh
+        try:
+            self.cursor.executemany(input1, input2)
+            self.conn.commit()
+            print("Insert records successfully")
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            self.conn.rollback #Đưa database về lại trạng thái trước khi thực thi lệnh
 
 
     def checkUpdate(self, input1, input2):
@@ -254,7 +250,7 @@ class Database:
 
         sql_Enroll = (
             "CREATE TABLE Enroll(" 
-            " Regis_ID INT," 
+            " Regis_ID VARCHAR(255)," 
             " MSSV VARCHAR(255)," 
             " Course_Name VARCHAR(255)," 
             " Regis_date DATE" 

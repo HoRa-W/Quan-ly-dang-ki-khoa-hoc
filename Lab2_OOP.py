@@ -26,7 +26,8 @@ def main():
     if test != 0:
         print("WELCOME")
         db.Connect()
-        db.dataBase_conn("Course_Registration")
+        db.checkConn()
+        db.Data_Important()
         time.sleep(2)
     else:
         print("Nhap sai roi")
@@ -55,7 +56,8 @@ def main():
             if num == 1:
                 db.InsertData(Insert_Temple5("Students"))
             elif num > 1:
-                db.InsertDatas(Inserts_Temple_5("Students", num))
+                x, y = Inserts_Temple_5("Students", num)
+                db.InsertDatas(x, y)
             else:
                 print("Nhap lai")
 
@@ -78,7 +80,8 @@ def main():
             if num == 1:
                 db.InsertData(Insert_Temple4("Courses"))
             elif num > 1:
-                db.InsertDatas(Inserts_Temple_4("Courses", num))
+                x, y = Inserts_Temple_4("Courses", num)
+                db.InsertDatas(x, y)
             else:
                 print("Nhap lai")
 

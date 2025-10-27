@@ -34,8 +34,8 @@ def update(text1): #Thuoc tinh can update
 
     in_where = input(f"WHERE {test[0]} = ")
 
-    out = f"UPDATE {text1} "\
+    out =(f"UPDATE {text1} "\
           f"SET {result} "\
           f"WHERE {test[0]} = {in_where};"
-    
+    )
     return out

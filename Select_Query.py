@@ -16,22 +16,23 @@ def Select(text1):
     if "Enroll" in text1: test = attribute_Enroll
     if "Students" in text1: test = attribute_Students
 
-    for i in range(len(text1)):
+    for i in range(len(test)):
         print(f"{test[i]}", sep = " - ")
 
     while(True):
         print(f"Ban muon tim kiem thong tin gi: ")
         find_in4 = input()
-        if (find_in4 in text1):
+        if (find_in4 in test):
             break
         else:
             print("Vui long nhap lai")
 
     Data_Find = input(f"Tim kiem thong tin gi cua {find_in4}: ")
 
-    out1 = f"SELECT * FROM {text1}"\
-           f"WHERE {find_in4} = {Data_Find};"
-    
+    out1 = (f"SELECT * FROM {text1} "\
+           f"WHERE {find_in4} = '{Data_Find}';"
+    )
+
     return out1
 
 
@@ -41,7 +42,7 @@ def Select_LotsCondition(text1): #text1 = Enroll
     #where (MSSV,...) = ?
     test = attribute_Enroll
 
-    for i in range(len(text1)):
+    for i in range(len(test)):
         print(f"{test[i]}", sep = " - ")
 
     print(f"Ban muon tim kiem thong tin gi (ghi co dau ','): ")
@@ -53,9 +54,9 @@ def Select_LotsCondition(text1): #text1 = Enroll
 
     out_where = " AND ".join([f"{find_in4[i]} = '{Data_Find[i]}'" for i in range(len(find_in4))])
 
-    out1 = f"SELECT * FROM {text1}"\
+    out1 = (f"SELECT * FROM {text1} "\
            f"WHERE {out_where};"
-    
+    )
     return out1
 
 def Select_All(text1):

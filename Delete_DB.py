@@ -14,7 +14,7 @@ def Delete_in4(text1):
     if "Enroll" in text1: test = attribute_Enroll
     if "Students" in text1: test = attribute_Students
 
-    for i in range(len(text1)):
+    for i in range(len(test)):
         print(f"{test[i]}", sep = " - ")
 
     while(True):
@@ -27,9 +27,9 @@ def Delete_in4(text1):
 
     Data_Del = input(f"Delete thong tin gi cua {find_in4}: ")
 
-    out1 = f"DELETE FROM {text1}"\
-           f"WHERE {find_in4} = {Data_Del};"
-    
+    out1 = (f"DELETE FROM {text1} "\
+           f"WHERE {find_in4} = `{Data_Del}`;"
+    )
     return out1
 
 def Delete_All(text1):

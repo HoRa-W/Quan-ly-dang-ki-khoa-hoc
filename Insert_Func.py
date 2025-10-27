@@ -18,7 +18,7 @@ def Insert_Temple4(text1):
         x.append(input(f"Nhap thong tin {test[i]}: "))
     out1 = f"INSERT INTO {text1} "\
            f"({test[0]}, {test[1]}, {test[2]}, {test[3]}) "\
-           f"VALUES (`{x[0]}`, `{x[1]}`, `{x[2]}`, `{x[3]}`)"
+           f"VALUES ('{x[0]}', '{x[1]}', '{x[2]}', '{x[3]}')"
 
     return out1
 
@@ -33,7 +33,7 @@ def Insert_Temple5(text1):
     out1 = (
         f"INSERT INTO {text1} "
         f"({test[0]}, {test[1]}, {test[2]}, {test[3]}, {test[4]}) "
-        f"VALUES (`{x[0]}`, `{x[1]}`, `{x[2]}`, `{x[3]}`, `{x[4]}`);"
+        f"VALUES ('{x[0]}', '{x[1]}', '{x[2]}', '{x[3]}', '{x[4]}');"
     )
 
     return out1
@@ -50,7 +50,7 @@ def Inserts_Temple_4(text1, num):
 
     out1 = (f"INSERT INTO {text1} "
         f"({test[0]}, {test[1]}, {test[2]}, {test[3]}) "
-        "VALUES (%s, %s, %s, %s)"
+        "VALUES (%s,%s,%s,%s) "
     )
 
     return out1, out2
@@ -67,9 +67,10 @@ def Inserts_Temple_5(text1, num):
 
     out1 = (f"INSERT INTO {text1} "
         f"({test[0]}, {test[1]}, {test[2]}, {test[3]}, {test[4]}) "
-        "VALUES (%s, %s, %s, %s, %s)"
+        "VALUES(%s,%s,%s,%s,%s) "
     )
-
+    
     return out1, out2
+
 
 
